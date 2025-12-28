@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^$ index.php?controlador=Register&metodo=mostrar [QSA,L]
+
+# Sin esta línea, el botón de "Registrarse" dará error
+RewriteRule ^registro/guardar$ index.php?controlador=Register&metodo=guardar [QSA,L]
+
+RewriteRule ^registro$ index.php?controlador=Register&metodo=mostrar [QSA,L]
+RewriteRule ^login$ index.php?controlador=Auth&metodo=login [QSA,L]
+RewriteRule ^logout$ index.php?controlador=Auth&metodo=logout [QSA,L]
+
+
+RewriteRule ^citas/ver$ index.php?controlador=Cita&metodo=listar [QSA,L]

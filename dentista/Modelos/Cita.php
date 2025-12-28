@@ -1,0 +1,45 @@
+<?php
+
+namespace Modelos;
+
+use Clases\Database;
+use Modelos\Usuario;
+
+class Cita
+{
+    // Propiedades mapeadas desde la consulta SQL
+    public private(set) int $id_cita;
+    public private(set) string $fecha_cita;    // DATETIME
+    public private(set) string $nombre_estado; // Viene de la tabla estado_cita
+    public private(set) ?string $servicios;    // Viene del GROUP_CONCAT
+
+    public static function getByUser(Usuario $usuario): array
+    {
+        $pdo = Database::connect();
+
+        //buscado en gemini, la consulta era muy completa
+        /* CONSULTA CORREGIDA PARA TU BASE DE DATOS REAL:
+           1. Tabla 'cita' (singular).
+           2. Tabla 'estado_cita' (columna 'estado').
+           3. Tabla 'cita_tiene_servicio' y 'servicio' para sacar el tipo de servicio.
+        */
+        $sql = "SELECT 
+                    c.id_cita,
+                    c.fecha_cita,
+                    e.estado as nombre_estado,
+                    GROUP_CONCAT(s.tipo SEPARATOR ', ') as servicios
+                FROM cita c
+                INNER JOIN estado_cita e ON c.id_estado = e.id_estado
+                LEFT JOIN cita_tiene_servicio cts ON c.id_cita = cts.id_cita
+                LEFT JOIN servicio s ON cts.id_servicio = s.id_servicio
+                WHERE c.id_usuario = :idu
+                GROUP BY c.id_cita
+                ORDER BY FIELD(e.estado, 'Pendiente', 'Confirmada', 'Rechazada'), 
+                         c.fecha_cita DESC";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([ ":idu" => $usuario->id ]);
+
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, Cita::class);
+    }
+}

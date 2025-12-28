@@ -1,0 +1,39 @@
+# Desarrollo web en Entorno Servidor
+
+services:
+
+  web:
+    container_name: docker-web
+    build: .
+    volumes:
+      - ./dentista:/var/www/html
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+  db:
+    container_name: docker-bd
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: clinica
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"  # Puerto estándar de MySQL solicitado
+
+  phpmyadmin:
+    container_name: docker-phpmyadmin
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8888:80"
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

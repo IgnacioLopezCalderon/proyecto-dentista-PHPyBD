@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Panel</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-image: url('/vistas/img/fondo.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 2rem;
+        }
+
+        .subtitulo {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .boton {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: opacity 0.2s;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .boton:hover {
+            opacity: 0.9;
+        }
+
+        .boton-pedir {
+            background-color: #007bff;
+        }
+
+        .boton-ver {
+            background-color: #6c757d;
+        }
+
+        .boton-cancelar {
+            background-color: #dc3545;
+        }
+
+        .enlace-salir {
+            display: block;
+            margin-top: 20px;
+            color: #dc3545;
+            text-decoration: none;
+            font-size: 1rem;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .enlace-salir:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="tarjeta">
+    <h1>Bienvenido, {{ usuario.nombre }}</h1>
+    <p class="subtitulo">¿Qué quieres hacer hoy?</p>
+
+    <a href="/citas/pedir" class="boton boton-pedir">📅 Pedir Cita</a>
+    <a href="/citas/ver" class="boton boton-ver">👀 Ver mis Citas</a>
+    <a href="/citas/cancelar" class="boton boton-cancelar">❌ Cancelar Citas</a>
+
+    <a href="/logout" class="enlace-salir">Cerrar Sesión</a>
+</div>
+
+</body>
+</html>
