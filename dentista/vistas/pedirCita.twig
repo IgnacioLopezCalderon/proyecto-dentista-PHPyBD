@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservar Cita</title>
+
+    <style>
+        /* --- TUS ESTILOS DE REGISTRO EXACTOS --- */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-image: url('/vistas/img/fondo.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .grid {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            align-items: center;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .col1 { grid-column: span 1; }
+            .col2 { grid-column: span 2; }
+            .col3 { grid-column: span 3; }
+            .col4 { grid-column: span 4; }
+            .col5 { grid-column: span 5; }
+            .col6 { grid-column: span 6; }
+            /* Tu columna centrada */
+            .col8 { grid-column: 3 / span 8; }
+            .col10 { grid-column: 2 / span 10; }
+            .col12 { grid-column: span 12; }
+        }
+
+        @media (max-width: 767px) {
+            .container { grid-column: 1 / span 12; margin: 15px; }
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #333;
+            margin: 0 0 20px 0;
+            text-align: center;
+        }
+
+        form { width: 100%; }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        input, select {
+            width: 100%;
+            height: 40px;
+            padding: 8px 10px;
+            font-size: 0.95rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fafafa;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #007bff;
+            background: white;
+            outline: none;
+        }
+
+        .boton {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .boton:hover {
+            background-color: #0056b3;
+        }
+
+        .footer-links{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #6c757d;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: #333;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="grid">
+    <div class="container col8">
+        <h1>Reservar Cita</h1>
+
+        <form action="" method="POST">
+
+            <div class="form-group">
+                <label for="servicio">¿Qué necesitas?</label>
+                <select name="servicio" id="servicio" required>
+                    <option value="" disabled selected>-- Selecciona un servicio --</option>
+
+                    {% for servicio in servicios %}
+                        <option value="{{ servicio.id_servicio }}">
+                            {{ servicio.tipo }} ({{ servicio.precio }}€)
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha">Fecha de la cita</label>
+                <input id="fecha" type="date" name="fecha" required min="{{ 'now'|date('Y-m-d') }}">
+            </div>
+
+            <div class="form-group">
+                <label for="hora">Hora deseada</label>
+                <input id="hora" type="time" name="hora" required min="09:00" max="20:00">
+            </div>
+
+            <button class="boton" type="submit">Confirmar Reserva</button>
+        </form>
+
+        <div class="footer-links">
+            <a href="/citas/cliente">Cancelar y volver</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
