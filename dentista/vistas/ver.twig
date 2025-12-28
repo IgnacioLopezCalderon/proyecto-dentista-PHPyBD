@@ -100,24 +100,32 @@
                     <th>Hora</th>
                     <th>Servicio(s)</th>
                     <th>Estado</th>
-                </tr>
+                    <th>Acción</th> </tr>
                 </thead>
+
                 <tbody>
                 {% for cita in citas %}
                     <tr>
                         <td>{{ cita.fecha_cita | date("d/m/Y") }}</td>
                         <td>{{ cita.fecha_cita | date("H:i") }}</td>
-
-                        <!-- Esta linea no sería necesaria si yo no quisiese añadir
-                         citas de forma manual para hacer pruebas-->
                         <td>
                             {{ cita.servicios ? cita.servicios : 'Sin servicio especificado' }}
                         </td>
+                        <td>
+                            <span class="estado {{ cita.nombre_estado|lower }}">
+                                {{ cita.nombre_estado }}
+                            </span>
+                        </td>
 
                         <td>
-                                    <span class="estado {{ cita.nombre_estado|lower }}">
-                                        {{ cita.nombre_estado }}
-                                    </span>
+                            {% if cita.nombre_estado == 'Pendiente' %}
+                                <form action="/citas/cancelar" method="POST" onsubmit="return confirm('¿Seguro que quieres cancelar esta cita?');">
+                                    <input type="hidden" name="id_cita" value="{{ cita.id_cita }}">
+                                    <button type="submit" class="btn-cancelar">❌ Cancelar</button>
+                                </form>
+                            {% else %}
+                                <span style="color: #999; font-size: 0.8rem;">No cancelable</span>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
@@ -130,7 +138,7 @@
         </div>
     {% endif %}
 
-    <a href="/" class="boton-volver">⬅ Volver al Panel</a>
+    <a href="/" class="boton-volver">Volver</a>
 </div>
 
 </body>

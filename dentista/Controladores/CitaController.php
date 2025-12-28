@@ -71,6 +71,30 @@ class CitaController extends BaseController
 
 
 
+
+
+    public function cancelar(): void
+    {
+        $usuario = Auth::user();
+
+        if (!$usuario) {
+            Request::redirectToRoute("login");
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $idCita = $_POST['id_cita'];
+            Cita::delete($idCita, $usuario->id);
+        }
+
+        Request::redirectToRoute("citas/ver");
+    }
+
+
+
+
+
     public function paginaPrincipal(): void
     {
         $usuario = Auth::user();

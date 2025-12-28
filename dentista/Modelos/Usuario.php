@@ -12,7 +12,7 @@
 		public int $id {
 			get => $this->id_usuario ;
 		}
-		
+
         public private(set) string $nombre;
         private string $apellido1;
         private ?string $apellido2; // "?" porque me daba error cuando era null
@@ -110,18 +110,18 @@
                                     VALUES (:nombre, :apellido1, :apellido2, :email, :password, :tipo_usuario)");
 
                 // Si el apellido2 está vacío, le ponemos null
-                $apellido2 = !empty($datos['apellido2']) ? $datos['apellido2'] : null;
+                $apellido2 = !empty($datos["apellido2"]) ? $datos["apellido"] : null;
 
                 // Encriptarmos la contraseña
                 $passHash = password_hash($datos['password'], PASSWORD_BCRYPT);
 
                 $stmt->execute([
-                    ":nombre"       => $datos['nombre'],
-                    ":apellido1"    => $datos['apellido1'],
+                    ":nombre"       => $datos["nombre"],
+                    ":apellido1"    => $datos["apellido1"],
                     ":apellido2"    => $apellido2,
-                    ":email"        => $datos['email'],
+                    ":email"        => $datos["email"],
                     ":password"     => $passHash,
-                    ":tipo_usuario" => $datos['tipo_usuario'] ?? 'cliente'
+                    ":tipo_usuario" => $datos["tipo_usuario"] ?? "cliente"
                 ]);
 
             } catch (\PDOException $e) {
@@ -129,7 +129,7 @@
                 //esta parte ha sido buscada en gemini
                 //si el error es igual al 1062 significa que el email que se está usando ya está en la BD
                 if ($e->errorInfo[1] == 1062) {
-                    echo "<h3 style='color:red'>Error: El correo '" . $datos['email'] . "' ya está registrado.</h3>";
+                    echo "<h3 style='color:red'>Error: El correo '" . $datos["email"] . "' ya está registrado.</h3>";
                     echo "<p><a href='/'>Volver al formulario de registro</a></p>";
                 } else {
                     // Si el error es diferente he decidido poner un mensaje genérico

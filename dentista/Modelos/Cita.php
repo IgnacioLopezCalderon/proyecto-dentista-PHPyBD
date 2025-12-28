@@ -65,4 +65,24 @@ class Cita
         ]);
 
     }
+
+
+
+
+    //funcion para borrar la cita
+    public static function delete(int $idCita, int $idUsuario): void
+    {
+        $pdo = Database::connect();
+
+        //le decimos a la base de dato que borre la cita si coincide el id de la cita con el del usuario
+        $sql = "DELETE FROM cita WHERE id_cita = :id AND id_usuario = :idu";
+
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+           ":id" => $idCita,
+           ":idu" => $idUsuario
+        ]);
+
+    }
 }

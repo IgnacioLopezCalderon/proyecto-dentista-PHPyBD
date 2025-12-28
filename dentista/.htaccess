@@ -13,3 +13,5 @@ RewriteRule ^logout$ index.php?controlador=Auth&metodo=logout [QSA,L]
 RewriteRule ^citas/cliente$ index.php?controlador=Cita&metodo=paginaPrincipal [QSA,L]
 RewriteRule ^citas/ver$ index.php?controlador=Cita&metodo=listar [QSA,L]
 RewriteRule ^citas/pedir$ index.php?controlador=Cita&metodo=pedirCita [QSA,L]
+
+RewriteRule ^citas/cancelar$ index.php?controlador=Cita&metodo=cancelar [QSA,L]
