@@ -17,12 +17,7 @@ class Cita
     {
         $pdo = Database::connect();
 
-        //buscado en gemini, la consulta era muy completa
-        /* CONSULTA CORREGIDA PARA TU BASE DE DATOS REAL:
-           1. Tabla 'cita' (singular).
-           2. Tabla 'estado_cita' (columna 'estado').
-           3. Tabla 'cita_tiene_servicio' y 'servicio' para sacar el tipo de servicio.
-        */
+        //buscado en gemini, la consulta era muy compleja
         $sql = "SELECT 
                     c.id_cita,
                     c.fecha_cita,
@@ -41,5 +36,33 @@ class Cita
         $stmt->execute([ ":idu" => $usuario->id ]);
 
         return $stmt->fetchAll(\PDO::FETCH_CLASS, Cita::class);
+    }
+
+
+
+    //vamos a crear el metodo "crear" para añadir citas
+    public static function create(array $datos): void
+    {
+        $pdo = Database::connect();
+
+        $sqlCita = "INSERT INTO cita (id_usuario, fecha_cita) VALUES (:idu, :fecha)";
+
+        $stmt = $pdo->prepare($sqlCita);
+        $stmt->execute([
+           ":idu" => $datos['id_usuario'],
+           ":fecha" => $datos['fecha_cita']
+        ]);
+
+        //Con esto recupero el id de la última cita creada
+        $idCitaCreada = $pdo->lastInsertId();
+
+        //creamos la consulta y los alias y lo ejecutamos
+        $sqlServicio = "INSERT INTO cita_tiene_servicio (id_cita, id_servicio) VALUES (:idc, :ids)";
+        $stmtServicio = $pdo->prepare($sqlServicio);
+        $stmtServicio->execute([
+            ":idc" => $idCitaCreada,
+            ":ids" => $datos['id_servicio']
+        ]);
+
     }
 }

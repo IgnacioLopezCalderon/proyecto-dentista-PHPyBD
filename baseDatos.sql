@@ -32,7 +32,7 @@ INSERT INTO servicio (tipo, precio) VALUES
 CREATE TABLE estado_cita (
     id_estado INT AUTO_INCREMENT PRIMARY KEY,
     estado VARCHAR(50) NOT NULL
-)
+);
 
 INSERT INTO estado_cita (estado) VALUES ('Pendiente'), ('Confirmada'), ('Rechazada');
 
