@@ -84,8 +84,7 @@
 
             {% if cita.nombre_estado != 'Finalizada' %}
                 <a href="/admin/citas/finalizar?id={{ cita.id_cita }}"
-                   class="btn btn-blue btn-cobrar"
-                   onclick="return confirm('¿Confirmas que el cliente ha pagado {{ total }}€? La cita se cerrará.');">
+                   class="btn btn-blue btn-cobrar">
                     ✅ Cobrar y Finalizar Cita
                 </a>
             {% else %}

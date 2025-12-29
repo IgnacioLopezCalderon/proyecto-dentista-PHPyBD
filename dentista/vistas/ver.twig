@@ -46,7 +46,7 @@
                             </td>
                             <td>
                                 {% if cita.nombre_estado == 'Pendiente' %}
-                                    <form action="/citas/cancelar" method="POST" onsubmit="return confirm('¿Cancelar cita?');" style="margin:0;">
+                                    <form action="/citas/cancelar" method="POST" style="margin:0;">
                                         <input type="hidden" name="id_cita" value="{{ cita.id_cita }}">
                                         <button type="submit" style="background:none; border:none; color:#dc3545; cursor:pointer; font-weight:bold;">
                                             ❌ Cancelar
