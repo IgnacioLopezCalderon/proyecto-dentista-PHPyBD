@@ -1,0 +1,44 @@
+{% extends "admin_base.twig" %}
+
+{% block titulo %}Citas Rechazadas{% endblock %}
+
+{% block contenido %}
+    <h1 style="border-bottom-color: #dc3545;">🚫 Citas Rechazadas</h1>
+
+    <div class="filtros">
+        <form action="/admin/citas/rechazadas" method="GET" style="display:flex; gap:10px;">
+            <input type="date" name="fecha" value="{{ fechaSeleccionada }}" style="padding:8px; border:1px solid #ccc; border-radius:4px;">
+            <button type="submit" class="btn btn-red">Filtrar</button>
+        </form>
+
+        <a href="/admin/citas/rechazadas?fecha={{ fechaHoy }}" class="btn btn-red" style="background-color: #a71d2a;">Ver Hoy</a>
+    </div>
+
+    {% if citas is empty %}
+        <p style="text-align:center; color:#777; margin-top: 30px;">No hay citas rechazadas en esta fecha.</p>
+    {% else %}
+        <table>
+            <thead>
+            <tr>
+                <th>Hora</th>
+                <th>Paciente</th>
+                <th>Servicio Solicitado</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cita in citas %}
+                <tr>
+                    <td><b>{{ cita.fecha_cita | date("H:i") }}</b></td>
+                    <td>
+                        {{ cita.nombre_paciente }} {{ cita.apellido_paciente }}<br>
+                        <small style="color:#666;">{{ cita.email }}</small>
+                    </td>
+                    <td>{{ cita.servicios }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <a href="/menu" class="footer-link">⬅ Volver al Menú</a>
+{% endblock %}

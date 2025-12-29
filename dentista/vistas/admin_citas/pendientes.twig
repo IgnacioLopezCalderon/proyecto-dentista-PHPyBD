@@ -1,0 +1,46 @@
+{% extends "admin_base.twig" %}
+
+{% block titulo %}Citas Pendientes{% endblock %}
+
+{% block contenido %}
+    <h1>⚠️ Citas Pendientes</h1>
+
+    {% if citas is empty %}
+        <div style="text-align:center; padding: 40px; color:#777;">
+            <p>✅ Todo al día. No hay citas pendientes.</p>
+        </div>
+    {% else %}
+        <div style="overflow-x:auto;">
+            <table>
+                <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Paciente</th>
+                    <th>Solicitud</th>
+                    <th style="text-align:center;">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cita in citas %}
+                    <tr>
+                        <td>
+                            <b>{{ cita.fecha_cita | date("d/m/Y") }}</b><br>
+                            <small>{{ cita.fecha_cita | date("H:i") }}</small>
+                        </td>
+                        <td>
+                            {{ cita.nombre_paciente }} {{ cita.apellido_paciente }}<br>
+                            <small style="color:#666;">{{ cita.email }}</small>
+                        </td>
+                        <td>{{ cita.servicios ? cita.servicios : 'General' }}</td>
+                        <td style="text-align:center;">
+                            <a href="/admin/citas/aceptar?id={{ cita.id_cita }}" class="btn btn-green" onclick="return confirm('¿Aceptar cita?');">✅</a>
+                            <a href="/admin/citas/rechazar?id={{ cita.id_cita }}" class="btn btn-red" onclick="return confirm('¿Rechazar cita?');">❌</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+    <a href="/menu" class="footer-link">⬅ Volver al Menú</a>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "admin_base.twig" %}
+
+{% block titulo %}Citas aceptadas{% endblock %}
+
+{% block contenido %}
+    <h1>📅 Agenda Diaria</h1>
+
+    <div class="filtros">
+        <form action="/admin/citas/aceptadas" method="GET" style="display:flex; gap:10px; width:100%;">
+            <div style="flex-grow:1;">
+                <label>Seleccionar Fecha:</label><br>
+                <input type="date" name="fecha" value="{{ fechaSeleccionada }}" style="padding:8px; border:1px solid #ccc; border-radius:4px;">
+            </div>
+            <button type="submit" class="btn btn-blue">Buscar</button>
+        </form>
+        <a href="/admin/citas/aceptadas?fecha={{ fechaHoy }}" class="btn btn-green">Hoy</a>
+    </div>
+
+    <h3>Viendo: {{ fechaSeleccionada | date("d/m/Y") }}</h3>
+
+    {% if citas is empty %}
+        <p style="text-align:center; margin-top:30px; color:#777;">No hay citas agendadas para este día.</p>
+    {% else %}
+        <table>
+            <thead>
+            <tr>
+                <th>Hora</th>
+                <th>Paciente</th>
+                <th>Servicio</th>
+                <th>Estado</th>
+                <th>Detalle</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cita in citas %}
+                <tr {% if cita.nombre_estado == 'Finalizada' %}style="opacity:0.6; background:#f1f8ff;"{% endif %}>
+                    <td><b>{{ cita.fecha_cita | date("H:i") }}</b></td>
+                    <td>{{ cita.nombre_paciente }} {{ cita.apellido_paciente }}</td>
+                    <td>{{ cita.servicios }}</td>
+                    <td>
+                        {% if cita.nombre_estado == 'Finalizada' %}
+                            <span style="color:blue; font-weight:bold;">Finalizada</span>
+                        {% else %}
+                            <span style="color:green; font-weight:bold;">Confirmada</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/admin/citas/detalle?id={{ cita.id_cita }}" class="btn btn-blue">Ver Ficha</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <a href="/menu" class="footer-link">⬅ Volver al Menú</a>
+{% endblock %}
