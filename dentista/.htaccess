@@ -15,3 +15,22 @@ RewriteRule ^citas/ver$ index.php?controlador=Cita&metodo=listar [QSA,L]
 RewriteRule ^citas/pedir$ index.php?controlador=Cita&metodo=pedirCita [QSA,L]
 
 RewriteRule ^citas/cancelar$ index.php?controlador=Cita&metodo=cancelar [QSA,L]
+
+
+# --- ADMINISTRACIÓN
+
+# ESTA ES LA NUEVA LÍNEA (El Menú Principal)
+RewriteRule ^menu$ index.php?controlador=Cita&metodo=mostrarMenuAdmin [QSA,L]
+
+RewriteRule ^admin/citas/pendientes$ index.php?controlador=Cita&metodo=listarPendientes [QSA,L]
+
+RewriteRule ^admin/citas/aceptar$ index.php?controlador=Cita&metodo=aceptarCita [QSA,L]
+RewriteRule ^admin/citas/rechazar$ index.php?controlador=Cita&metodo=rechazarCita [QSA,L]
+
+RewriteRule ^admin/citas/aceptadas$ index.php?controlador=Cita&metodo=listarAceptadas [QSA,L]
+RewriteRule ^admin/citas/rechazadas$ index.php?controlador=Cita&metodo=listarRechazadas [QSA,L]
+
+RewriteRule ^admin/citas/detalle$ index.php?controlador=Cita&metodo=verDetalle [QSA,L]
+
+
+RewriteRule ^admin/citas/finalizar$ index.php?controlador=Cita&metodo=finalizarCita [QSA,L]

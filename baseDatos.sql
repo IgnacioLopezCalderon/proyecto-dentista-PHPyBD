@@ -34,7 +34,7 @@ CREATE TABLE estado_cita (
     estado VARCHAR(50) NOT NULL
 );
 
-INSERT INTO estado_cita (estado) VALUES ('Pendiente'), ('Confirmada'), ('Rechazada');
+INSERT INTO estado_cita (estado) VALUES ('Pendiente'), ('Confirmada'), ('Rechazada'), ('Finalizada');
 
 
 

@@ -1,109 +1,26 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel Administración</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+{% extends "admin_base.twig" %}
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-image: url('/vistas/img/fondo.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+{% block titulo %}Panel Administrador{% endblock %}
 
-        .tarjeta {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 100%;
-            max-width: 450px;
-        }
+{% block contenido %}
+    <div style="text-align:center; max-width:500px; margin:0 auto;">
+        <h1>Menú de Administración</h1>
+        <p style="color:#666; margin-bottom:30px;">Gestión de mi clínica dental</p>
 
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 5px;
-            font-size: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        <a href="/admin/citas/pendientes" class="btn btn-orange" style="display:block; margin-bottom:15px; padding:15px; font-size:1.1rem;">
+            ⚠️ Citas Pendientes
+        </a>
 
-        .subtitulo {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
+        <a href="/admin/citas/aceptadas" class="btn btn-green" style="display:block; margin-bottom:15px; padding:15px; font-size:1.1rem;">
+            ✅ Citas Aceptadas
+        </a>
 
-        .boton {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 15px;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: transform 0.1s, opacity 0.2s;
-            text-align: center;
-            font-size: 1.1rem;
-        }
+        <a href="/admin/citas/rechazadas" class="btn btn-red" style="display:block; margin-bottom:15px; padding:15px; font-size:1.1rem;">
+            🚫 Citas rechazadas
+        </a>
 
-        .boton:hover {
-            transform: scale(1.02);
-            opacity: 0.95;
-        }
-
-        .boton-pendientes {
-            background-color: #f0ad4e;
-        }
-
-        .boton-aceptadas {
-            background-color: #28a745;
-        }
-
-        .boton-rechazadas {
-            background-color: #d9534f;
-        }
-
-        .enlace-salir {
-            display: block;
-            margin-top: 20px;
-            color: #dc3545;
-            text-decoration: none;
-            font-size: 1rem;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-        }
-
-        .enlace-salir:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-
-<div class="tarjeta">
-    <h1>Administrador</h1>
-    <p class="subtitulo">Panel de Control de Citas</p>
-
-    <a href="/admin/citas/pendientes" class="boton boton-pendientes">⚠️ Citas Pendientes</a>
-    <a href="/admin/citas/aceptadas" class="boton boton-aceptadas">✅ Citas Aceptadas</a>
-    <a href="/admin/citas/rechazadas" class="boton boton-rechazadas">🚫 Citas Rechazadas</a>
-
-    <a href="/logout" class="enlace-salir">Cerrar Sesión</a>
-</div>
-
-</body>
-</html>
+        <div style="margin-top:40px; border-top:1px solid #eee; padding-top:20px;">
+            <a href="/logout" style="color:#dc3545; text-decoration:none;">Cerrar Sesión</a>
+        </div>
+    </div>
+{% endblock %}
