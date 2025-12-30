@@ -11,8 +11,16 @@ CREATE TABLE usuario (
 
 
 
-INSERT INTO usuario (nombre, apellido1, email, password, tipo_usuario)
-VALUES ('Admin', 'Jefe', 'admin@clinica.com', '123456', 'administrador');
+
+INSERT INTO usuario (nombre, apellido1, apellido2, email, password, tipo_usuario)
+VALUES (
+           'Admin',
+           'admin',
+           'admin secundario',
+           'admin@clinica.com',
+           '$2y$12$A9O/JDvVsh62xlx49ogv6OGSMb8MAFssVVBphbpfJr6Rw3LpOTKeW',
+           'administrador'
+       );
 
 
 
