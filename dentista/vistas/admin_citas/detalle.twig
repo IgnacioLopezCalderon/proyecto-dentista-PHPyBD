@@ -4,21 +4,66 @@
 
 {% block estilos_extra %}
     <style>
-        /* Estilos locales para limpiar el HTML */
-        .encabezado { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .encabezado {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-        .btn-gray { background-color: #666; }
-        .btn-cobrar { width: 100%; display: block; text-align: center; font-size: 1.1rem; padding: 15px; margin-top: 20px; }
+        .btn-gray {
+            background-color: #666;
+        }
 
-        .grid-layout { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
-        .columna { flex: 1; min-width: 300px; }
+        .btn-cobrar {
+            width: 100%;
+            display: block;
+            text-align: center;
+            font-size: 1.1rem;
+            padding: 15px;
+            margin-top: 20px;
+        }
 
-        .card-datos { background: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #eee; }
+        .grid-layout {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
 
-        .precio-col { text-align: right; }
-        .total { text-align: right; font-size: 1.5rem; font-weight: bold; margin-top: 20px; color: #333; }
+        .columna {
+            flex: 1;
+            min-width: 300px;
+        }
 
-        .aviso-finalizada { margin-top: 20px; text-align: center; padding: 15px; background: #e8f4fd; color: #0056b3; border-radius: 5px; font-weight: bold; }
+        .card-datos {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .precio-col {
+            text-align: right;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .aviso-finalizada {
+            margin-top: 20px;
+            text-align: center;
+            padding: 15px;
+            background: #e8f4fd;
+            color: #0056b3;
+            border-radius: 5px;
+            font-weight: bold;
+        }
     </style>
 {% endblock %}
 

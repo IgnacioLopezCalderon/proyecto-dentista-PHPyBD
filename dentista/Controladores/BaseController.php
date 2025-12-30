@@ -20,7 +20,6 @@
 			# Creamos el entorno TWIG
 			$this->twig = new \Twig\Environment($loader) ;
 			
-			# Crear una nueva funcionalidad para TWIG
 			# comprueba si hay una sesión activa
 			$this->twig->addFunction( new \Twig\TwigFunction( "active", function()
 														{

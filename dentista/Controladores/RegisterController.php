@@ -10,7 +10,7 @@ class RegisterController extends BaseController
 {
     /**
      * Muestra el formulario de registro
-     * Ruta: /registro
+     * O muestra el menú
      * @return void
      */
     public function mostrar(): void
@@ -41,7 +41,6 @@ class RegisterController extends BaseController
 
     /**
      * Procesa el formulario y guarda el usuario
-     * Ruta: /registro/guardar
      * @return void
      */
     public function guardar(): void
