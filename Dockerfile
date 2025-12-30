@@ -11,10 +11,9 @@ RUN docker-php-ext-enable pdo_mysql
 
 RUN a2enmod rewrite
 
+
 #El dockerfile nmo funcionaba porque ponía user en vez de usr
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 
-RUN composer install --no-interaction
-
-RUN chown -R www-data:www-data /var/www/html
+WORKDIR /var/www/html
