@@ -20,7 +20,6 @@ final class Database
         try {
             $dsn = "mysql:host=".self::DBHOST.";dbname=".self::DBNAME.";charset=utf8mb4";
 
-            // Tal como pediste:
             return \PDO::connect($dsn, self::DBUSER, self::DBPASS);
 
         } catch(\PDOException $pdoe) {
